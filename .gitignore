@@ -1,0 +1,24 @@
+# Python-related
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Flask-related
+instance/
+.webassets-cache
+
+# Environment variables
+.env
+
+# IDE-related
+.vscode/
+.idea/
+
+# Miscellaneous
+*.log
+.DS_Store

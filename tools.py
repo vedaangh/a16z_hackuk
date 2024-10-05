@@ -44,7 +44,11 @@ class SearchTooling:
         url = self.base_url
 
         # Query parameters
-        params = {"q": query, "count": 10}  # Number of results to return
+        params = {
+            "q": query,
+            "count": 10,
+            "result_filter": "web",
+        }  # Number of results to return
 
         # Headers to match the curl request
         headers = {
@@ -120,17 +124,18 @@ class SearchTooling:
         - List[str]: A list of file paths where screenshots are saved.
         """
         # Perform a web search to get URLs using Brave API
-        search_results = self.search_web_information(query)
-        urls = [result["url"] for result in search_results.get("results", [])]
-        print(urls)
-        # Set up the Selenium WebDriver
+        search_results = (
+            self.search_web_information(query).get("web", {}).get("results", [])
+        )
+        urls = [result["url"] for result in search_results]
+
+        # Set up the Selenium WebDriver with webdriver-manager
         options = Options()
         options.add_argument("--headless")  # Run in headless mode
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-        driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()), options=options
-        )
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
 
         # Create the save directory if it doesn't exist
         save_dir = os.path.join(os.getcwd(), save_dir)
@@ -156,17 +161,18 @@ class SearchTooling:
 
 # Example usage with pretty printing
 if __name__ == "__main__":
+    query = "cool hackathon websites"
     search_tool = SearchTooling(brave_api_key)
-    results = search_tool.search_web_information("Mistral AI hackathon")
+    results = search_tool.search_web_information(query)
     print("Search Results:")
     pprint(results, indent=2, width=100)
 
     # Image search example
-    image_results = search_tool.search_web_pictures("hackathons", "/images")
+    image_results = search_tool.search_web_pictures(query, "/images")
     print("\nImage Search Results:")
     pprint(image_results, indent=2, width=100)
 
     # Screenshot example
-    screenshot_results = search_tool.screenshot_web("hackathons")
+    screenshot_results = search_tool.screenshot_web(query)
     print("\nScreenshot Results:")
     pprint(screenshot_results, indent=2, width=100)
