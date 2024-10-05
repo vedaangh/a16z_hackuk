@@ -29,9 +29,32 @@ def main(user_input):
     return final_website
 
 def parse_user_input(user_input):
-    # Parse user input into structured event details
-    # ... implementation ...
-    pass
+    prompt = f"""
+    Analyze the following user input for an event webpage and extract key information. Provide a summary of the event details in a natural language format. Include any important aspects mentioned by the user, such as event description, date, time, venue, theme, color preferences, or other requirements.
+
+    User Input:
+    {user_input}
+
+    Please provide a concise summary of the event details, highlighting the most important aspects. If any key information is missing, you can mention that in your summary.
+
+    Example output:
+    The user is planning a Summer Music Festival, scheduled for July 15, 2024, from 12 PM to 10 PM at Central Park. The event has a bohemian summer theme with a color scheme of warm reds, teals, and sky blues. They emphasize eco-friendly decorations and request accessibility for disabled attendees. The user didn't specify any particular requirements for the website design.
+
+    Now, please analyze the user input and provide a similar summary:
+    """
+
+    messages = [
+        {"role": "user", "content": prompt}
+    ]
+
+    response = client.chat(
+        model=MODELS["text"],
+        messages=messages
+    )
+
+    print(response)
+
+    return response.messages[0].content
 
 def get_reference_images(event_details):
     # Use Brave API to get screenshots and posters

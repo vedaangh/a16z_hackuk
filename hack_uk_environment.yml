@@ -91,4 +91,4 @@ dependencies:
       - python-dateutil==2.8.2
       - six==1.16.0
       - typing-inspect==0.9.0
-prefix: /home/vedaangh/anaconda3/envs/hack_uk
+prefix: /usr/local/envs/hack_uk
