@@ -5,7 +5,7 @@ api_key = os.environ["MISTRAL_API_KEY"]
 client = Mistral(api_key=api_key)
 
 MODELS = {
-    "large": "mistral-large-latest",
+    "text": "mistral-large-latest",
     "image": "pixtral-12b-2409",
     "code": "codestral-12b-2409",
 }
