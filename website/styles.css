@@ -1,0 +1,56 @@
+.bg-orange-400 {
+background-color: #fb923c;
+}
+
+.text-orange-400 {
+color: #fb923c;
+}
+
+.bg-gray-100 {
+background-color: #f7fafc;
+}
+
+.text-black {
+color: #000000;
+}
+
+body {
+font-family: Arial, sans-serif;
+}
+
+h1, h2, h3 {
+font-family: 'Helvetica Neue', sans-serif;
+}
+
+p {
+margin-bottom: 1em;
+line-height: 1.6;
+}
+
+ul {
+margin-bottom: 1em;
+}
+
+button {
+font-size: 1.25rem;
+}
+
+.fas {
+margin-right: 0.5em;
+}
+
+section {
+margin-bottom: 2em;
+}
+
+.bg-white {
+background-color: #ffffff;
+}
+
+.rounded {
+border-radius: 0.5em;
+}
+
+.shadow {
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
