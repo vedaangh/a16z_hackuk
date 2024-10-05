@@ -18,10 +18,10 @@ def main(user_input):
     reference_images = get_reference_images(event_details)
     
     # Generate website structure
-    website_structure = generate_website_structure(event_details, reference_images)
+    website_design = generate_website_design(event_details, reference_images)
     
     # Generate individual pages
-    pages = generate_pages(website_structure, event_details, reference_images)
+    pages = generate_pages(website_design, event_details, reference_images)
     
     # Refine and optimize code
     final_website = refine_website(pages, event_details)
@@ -68,18 +68,16 @@ def get_reference_images(event_details):
     # Use Pixtral to process and filter relevant images
     pass
 
-def generate_website_structure(event_details, reference_images):
-    # Use Pixtral to generate initial website structure
-    # ... implementation ...
+def generate_website_design(event_details, reference_images):
+    # Use Pixtral to generate initial website design
     pass
 
-def generate_pages(website_structure, event_details, reference_images):
-    # Generate individual pages based on the structure
+def generate_pages(website_design, event_details, reference_images):
+    # Generate individual pages based on the design
     pass
 
-def generate_page_content(page, event_details, reference_images):
+def generate_page_content(website_design, page, event_details, reference_images):
     # Generate content for a single page
-    # ... implementation ...
     pass
 
 def refine_website(pages, event_details):
