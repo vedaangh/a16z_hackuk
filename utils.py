@@ -1,5 +1,6 @@
 from mistralai import Mistral
 import os
+import base64
 
 api_key = os.environ["MISTRAL_API_KEY"]
 client = Mistral(api_key=api_key)
@@ -68,9 +69,62 @@ def get_reference_images(event_details):
     # Use Pixtral to process and filter relevant images
     pass
 
-def generate_website_theme(event_details, reference_images):
+def _encode_image(image_path: str) -> str:
+    # Encode image to base64
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode('utf-8')
+
+def generate_website_theme(event_details, reference_images, image_dir="/screenshots"):
     # Use Pixtral to generate initial website theme
-    pass
+
+    image_paths = [f"{image_dir}/{image_name}" for image_name in reference_images]
+    images = [{"type": "image_url", "image_url": f"data:image/jpeg;base64,{_encode_image(path)}"} for path in image_paths]
+
+    messages = [
+        {
+            "role": "system",
+            "content": "You are an exceptionally skilled web designer. Create a modern, spectacular website theme based on requirements and loosely based on the provided images."
+        },
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": f"""Generate a website theme based on these images and the following requirements: {event_details}
+
+                    Please provide:
+                    1. A CSS file with very modern, responsive design and cool web design features
+                    2. A basic HTML structure for the home page
+                    3. Design tokens (colors, typography, spacing)
+
+                    Format your response as follows:
+
+                    [CSS]
+                    (Your CSS code here)
+                    [/CSS]
+
+                    [HTML]
+                    (Your HTML structure here)
+                    [/HTML]
+
+                    [DESIGN_TOKENS]
+                    (Your design tokens here in JSON format)
+                    [/DESIGN_TOKENS]
+
+                    Ensure spectacular and modern design using latest web technologies and trends."""
+                },
+                *images
+            ]
+        }
+    ]
+
+    chat_response = client.chat.complete(
+        model=MODELS["image"],
+        messages=messages
+    )
+    
+    return chat_response.choices[0].message.content
+    
 
 def generate_pages(website_theme, event_details, reference_images):
     # Generate individual pages based on the theme
