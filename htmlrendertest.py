@@ -74,7 +74,7 @@ import base64
 
 
 # Retrieve the API key from environment variables
-api_key = 'cjWXJdIDEdi5maw0NUiKXyoxM1pXUfni'
+
 
 # Specify model
 model2 = "pixtral-12b-2409"
