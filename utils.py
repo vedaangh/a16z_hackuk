@@ -7,7 +7,7 @@ client = Mistral(api_key=api_key)
 MODELS = {
     "text": "mistral-large-latest",
     "image": "pixtral-12b-2409",
-    "code": "codestral-12b-2409",
+    "code": "codestral-mamba-latest",
 }
 
 def main(user_input):
