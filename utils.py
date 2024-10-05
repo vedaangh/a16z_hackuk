@@ -13,7 +13,7 @@ MODELS = {
 
 def main(user_input):
     # Parse user input
-    event_details = parse_user_input(user_input)
+    event_details = generate_event_details(user_input)
     
     # Get reference images
     reference_images = get_reference_images(event_details)
@@ -29,30 +29,25 @@ def main(user_input):
     
     return final_website
 
-def parse_user_input(user_input):
+def generate_event_details(user_input):
+    # Generate event details from user input
+
     prompt = f"""
-    Analyze the following user input for an event webpage and extract key information. Provide a summary of the event details in a structured format. Include any important aspects mentioned by the user, such as event description, date, time, venue, theme, color preferences, or other requirements.
+    You are an AI assistant helping to create a website for an event based on a user's input. The input might be vague or minimal. Your task is to expand on this input and provide rich context for website generation.
 
-    User Input:
-    {user_input}
+    Given the user input: "{user_input}"
 
-    Please provide a concise summary of the event details, highlighting the most important aspects. The type of information being provided will be variable depenending on the user input, so don't mention 'not mentioned' for any information. Accept that the user might not have mentioned certain details, and don't bring it up. Write any info that can be inferred from the user input.
+    1. Interpret the core idea of the event.
+    2. Imagine and describe key aspects that would be relevant for creating a website.
+    3. Suggest a theme, style, or mood that would suit this event.
+    4. If any specific details are mentioned (like date, location, etc.), include them. If not, do not mention them, or add TBD.
+    5. If no specific design details are given, feel free to creatively fill in gaps that would help in website design.
 
-    Example output:
-    Event Name: Summer Music Festival
-    Event Description: A music festival with a bohemian summer theme.
-    Date: July 15, 2024
-    Time: 12 PM to 10 PM
-    Venue: Central Park
-    Theme: Bohemian Summer
-    Color Preferences: Warm Reds, Teals, Sky Blues
-    Decorations: Eco-friendly
-    Accessibility: Disabled attendees
-
-    Now, please analyze the user input and provide a similar summary:
+    Provide your response as a concise paragraph or two, focusing on elements that would inspire and guide the creation of a spectacular, modern website. Your output will be used directly in further prompts for website generation, so make it rich and descriptive.
     """
 
     messages = [
+        {"role": "system", "content": "You are a creative event planner and web designer, skilled at interpreting client needs and expanding on minimal information."},
         {"role": "user", "content": prompt}
     ]
 
