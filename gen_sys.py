@@ -6,9 +6,6 @@ import os
 import shutil
 
 
-
-
-
 def plan_design():
     # simply prompt the LLM. Provide it with search tools.
     # Come up with a step-by-step plan for the website.
