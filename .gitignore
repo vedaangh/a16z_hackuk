@@ -22,3 +22,6 @@ instance/
 # Miscellaneous
 *.log
 .DS_Store
+
+# Jupyter
+demo.ipynb
