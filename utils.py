@@ -78,40 +78,51 @@ def generate_website_theme(event_details, reference_images, image_dir="/screensh
     messages = [
         {
             "role": "system",
-            "content": "You are an exceptionally skilled web designer. Create a modern, spectacular website theme based on requirements and loosely based on the provided images."
+            "content": "You are a world-class web designer specializing in creating cutting-edge, visually stunning websites with modern design trends and advanced features."
         },
         {
             "role": "user",
             "content": [
                 {
                     "type": "text",
-                    "text": f"""Generate a website theme based on these images and the following requirements: {event_details}
+                    "text": f"""Generate an innovative, visually striking website theme based on these requirements: {event_details}
 
-                    Please provide:
-                    1. A CSS file with very modern, responsive design and cool web design features
-                    2. A basic HTML structure for the home page
-                    3. Design tokens (colors, typography, spacing)
+                    Create a design that pushes the boundaries of modern web aesthetics, incorporating:
+                    
+                    1. Bold, eye-catching typography and layout
+                    2. Creative use of color gradients and transitions
+                    3. Dynamic, interactive elements (describe animations/transitions)
+                    4. Innovative navigation patterns
+                    5. Integration of subtle, elegant background patterns or textures
+                    6. Thoughtful use of white space and asymmetry
+                    7. Responsive design principles for various screen sizes
+                    8. Cutting-edge CSS features (e.g. grid, flexbox, animations)
 
-                    Format your response as follows:
+                    Provide the following, focusing on spectacular visual design and modern UX:
 
                     [CSS]
-                    (Your CSS code here)
+                    (Your advanced CSS code here, including any necessary animations or transitions)
                     [/CSS]
 
                     [HTML]
-                    (Your HTML structure here)
+                    (Your semantic HTML structure here, optimized for modern browsers)
                     [/HTML]
 
                     [DESIGN_TOKENS]
-                    (Your design tokens here in JSON format)
+                    (Your design tokens here in JSON format, including color schemes, typography, spacing, and breakpoints)
                     [/DESIGN_TOKENS]
 
-                    Ensure spectacular and modern design using latest web technologies and trends."""
+                    [DESIGN_NOTES]
+                    (Brief notes on key design decisions, innovative features, and suggested enhancements)
+                    [/DESIGN_NOTES]
+
+                    Ensure the design is not only visually impressive but also accessible and performance-optimized."""
                 },
                 *images
             ]
         }
     ]
+
 
     chat_response = client.chat.complete(
         model=MODELS["image"],
