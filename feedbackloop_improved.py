@@ -98,7 +98,7 @@ def get_feedback(image_path):
 
 def improve_website_code(original_code, feedback):
     prompt = f"""
-    Improve the following website code for the Mistral AI Hackathon based on this feedback:
+    Improve the design of the following website code for the Mistral AI Hackathon based on this feedback:
     {feedback}
     
     Original code:
@@ -127,17 +127,22 @@ async def main():
     initial_code = generate_website_code()
     
     # Render and screenshot the initial website
-    await render_and_screenshot(initial_code["html"], initial_code["css"], initial_code["js"], 'initial_output.png')
-    
-    # Get feedback on the initial design
-    feedback = get_feedback('initial_output.png')
-    print("Feedback:", feedback)
-    
-    # Improve the website code based on feedback
-    improved_code = improve_website_code(initial_code, feedback)
-    
-    # Render and screenshot the improved website
-    await render_and_screenshot(improved_code["html"], improved_code["css"], improved_code["js"], 'improved_output.png')
+    n = 5
+    await render_and_screenshot(initial_code["html"], initial_code["css"], initial_code["js"], 'improved_output_-1.png')
+    for x in range(n):
+
+
+        
+        # Get feedback on the initial design
+        feedback = get_feedback('improved_output_{0}.png'.format(str(x-1)))
+        print("Feedback:", feedback)
+        
+        # Improve the website code based on feedback
+        improved_code = improve_website_code(initial_code, feedback)
+        
+        # Render and screenshot the improved website
+        await render_and_screenshot(improved_code["html"], improved_code["css"], improved_code["js"], 'improved_output_{0}.png'.format(str(x)))
+        initial_code = improved_code
     
     print("Website generation process completed. Check 'initial_output.png' and 'improved_output.png' for results.")
 
